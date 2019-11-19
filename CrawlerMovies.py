@@ -19,7 +19,7 @@ class MovieSpider(scrapy.Spider):
                 name = movie.css('article.card h1::text').get()
                 imageM = movie.css('article.card img::attr(data-src)').get()
                 yield {'date': date, 'sinopse': sinopse, 'category': category, 'name': name, 'imageM': imageM}
-                #Colcoa as informações em um dicionário.
+                #Coloca as informações em um dicionário.
                 x = {"name": name, "sinopse": sinopse, "category": category, "date": date, "imageM": imageM}
                 self.lista.append(x) #Insere o dicionário em uma lista.
         self.saveJson()
@@ -27,5 +27,5 @@ class MovieSpider(scrapy.Spider):
     '''Salva as informações em um arquivo Json.'''
     def saveJson(self):
         self.informationsM['complet'] = self.lista
-        with open("InformationsM.json", "w", encoding='utf-8') as outfile:
+        with open("InformationsM.json", "w") as outfile:
             json.dump(self.informationsM, outfile, ensure_ascii = False)
