@@ -8,6 +8,15 @@ import json
 import os.path
 
 class Treatments:
+    __wordsPositive = ['encantado', 'encantada', 'encantador', 'legal', 'animado', 'animada', 'entusiasmado', 'entusiasmada',
+                'amei', 'amo', 'feliz', 'bom', 'admirável', 'lindo', 'admirado', 'admirada', 'surpresa', 'surpreso',
+                'alegre', 'agradável', 'adorei', 'adoro', 'divertido', 'prazeroso', 'prazerosa', 'adorável', 'maravilhoso',
+                'melhor', 'perfeito', 'excelente', 'brilhante', 'extraordinário']
+
+    __wordsNegative = ['raiva', 'desapontado', 'desapontada', 'irritado', 'irritada', 'ruim', 'péssimo', 'horrível', 
+                 'odiei', 'odeio', 'irritante', 'arrependido', 'arrependida', 'desgosto', 'chato', 'detestável',
+                 'insuportável', 'desagradável', 'decepção', 'decepcionado', 'decepcionou', 'decepcionada',
+                 'pior', 'piorou']
     
     def writeJson(self, lista):
         with open("InformationsM.json", "w") as outfile:
@@ -35,5 +44,16 @@ class Treatments:
                 listMovies.append(movies['name'])
         return listMovies
             
-            
-            
+    def checkPositiveOrNegative(self, description):
+        quantP = 0
+        quantN = 0
+        description = description.split(' ', ',')
+        for dtweet in description:
+            if(dtweet in self.__wordsPositive):
+                quantP += 1
+            elif(dtweet in self.__wordsNegative):
+                quantN += 1
+            else:
+                continue
+        listPN = {'quantP': quantP, 'quantN': quantN}
+        return listPN

@@ -28,4 +28,4 @@ class MovieSpider(scrapy.Spider):
     def saveJson(self):
         self.informationsM['complet'] = self.lista
         with open("InformationsM.json", "w") as outfile:
-            json.dump(self.informationsM, outfile, ensure_ascii = False)
+            json.dump(self.informationsM, outfile) 

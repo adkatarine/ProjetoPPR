@@ -30,13 +30,12 @@ class CrawlerTwitter:
         ct_streamListener = CrawlerTwitterSL()
         api = tweepy.API(self.__autentica)
         #mv = [str(u) for u in self.__listNameMovies]
-        mk = ['Adam', 'Malévola - Dona do Mal', ' A Família Addams', 'bob esponja']
-        mc = ['O Exterminador do Futuro: Destino Sombrio',
-              'Dora e a Cidade Perdida', 'patrick', 'Doutor Sono']
-        mm = ['Estaremos Sempre Juntos', 'Ford vs. Ferrari', 'As Panteras']
-        md = ['Invasão ao Serviço Secreto', 'Dora e a Cidade Perdida', 'Coringa']
+        #mv.remove('None')
+        filme = ['Adam', 'Malévola - Dona do Mal', ' A Família Addams', 'bob esponja', 'O Exterminador do Futuro: Destino Sombrio',
+              'Dora e a Cidade Perdida', 'patrick', 'Doutor Sono', 'Estaremos Sempre Juntos', 'Ford vs. Ferrari', 'As Panteras',
+              'Invasão ao Serviço Secreto', 'Dora e a Cidade Perdida', 'Coringa']
         stream = tweepy.Stream(api.auth, ct_streamListener)
-        stream.filter(track= mk and mc, languages=["pt"])
+        stream.filter(track= filme, languages=["pt"])
         
     def getListNameMovies(self):
         return self.__listNameMovies
@@ -50,11 +49,12 @@ class CrawlerTwitter:
 class CrawlerTwitterSL(tweepy.StreamListener):
 
     def on_status(self, status):
-        # and ('RT @' not in status.text)
         if not status.retweeted and 'RT @' not in status.text:
             print('TWEET')
             #print(status.text)
-            print([status.user.name,status.created_at,status.text])
+            print([status.user.name,status.text])
+            with open("tweetsCrawler.txt", 'a') as tf:
+                tf.write(status.text)
 
     def on_error(self, status_code):
         if status_code == 420: 
