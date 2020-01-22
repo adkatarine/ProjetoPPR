@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 """
 Created on Wed Nov 13 12:31:14 2019
-
 @author: Adlla Katarine
 """
 import tweepy

@@ -1,5 +1,6 @@
 import scrapy
 import json
+from scrapy.crawler import CrawlerProcess
 
 class MovieSpider(scrapy.Spider):
     name = "movieSpider"
@@ -7,7 +8,6 @@ class MovieSpider(scrapy.Spider):
     informationsM = {}
     lista = []
 
-    ''''''
     def parse(self, response):
         for movie in response.css('div.swiper-slide'):
             estreia = movie.css('article.card span.tag-genre').get()
@@ -29,3 +29,11 @@ class MovieSpider(scrapy.Spider):
         self.informationsM['complet'] = self.lista
         with open("InformationsM.json", "w") as outfile:
             json.dump(self.informationsM, outfile) 
+
+process = CrawlerProcess(settings={
+    'FEED_FORMAT': 'json',
+    'FEED_URI': 'items.json'
+})
+
+process.crawl(MovieSpider)
+process.start()

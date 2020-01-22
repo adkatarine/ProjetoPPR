@@ -37,6 +37,9 @@ class Treatments:
     def checkMovieList(self, lista, movie):
        return movie in lista
    
+    def description(self, jsonL):
+        
+    
     def nameMovies(self, jsonL):
         listMovies = []
         for movies in jsonL:
