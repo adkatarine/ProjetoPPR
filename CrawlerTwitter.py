@@ -6,6 +6,8 @@ Created on Wed Nov 13 12:31:14 2019
 import tweepy
 import Treatments as tm
 treatments = tm.Treatments()
+import SentimentsAnalysisTweets as sat
+sentimentTweets = sat.WatsonSentimentsAnalysis()
 #import json
 
 class CrawlerTwitter:
@@ -16,6 +18,7 @@ class CrawlerTwitter:
     __autentica = None
     __listJson = {}
     __listNameMovies = []
+    __sentiment = False
     
     def __init__(self):
         self.__autentica = tweepy.OAuthHandler(self.__key, self.__keySecret)
@@ -35,6 +38,14 @@ class CrawlerTwitter:
               'Invasão ao Serviço Secreto', 'Dora e a Cidade Perdida', 'Coringa']
         stream = tweepy.Stream(api.auth, ct_streamListener)
         stream.filter(track= filme, languages=["pt"])
+    
+    '''Verifica se o sentimento retornado é True(positivo) ou False(negativo)'''
+    def checkSentiment(self, tweet):
+        self.__sentiment = sentimentTweets.checkSentiment(tweet)
+        if(self.__sentiment == True):
+            pass
+        elif():
+            pass
         
     def getListNameMovies(self):
         return self.__listNameMovies
