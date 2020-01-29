@@ -1,10 +1,13 @@
 import scrapy
 from scrapy.crawler import CrawlerProcess
+import DynamoDBPut as ddb
+dynamodb = ddb.DynamoDBPut()
 
 class MovieSpider(scrapy.Spider):
     name = "movieSpider"
     start_urls = ['https://www.ingresso.com/sao-paulo/home']
-
+    lista = []
+    
     '''Recebe a resposta da requisição(response) e realiza o parse para extração das informações sobre os filmes.'''
     def parse(self, response):
         for movie in response.css('div.swiper-slide'):
@@ -17,13 +20,13 @@ class MovieSpider(scrapy.Spider):
                 name = movie.css('article.card h1::text').get()
                 imageM = movie.css('article.card img::attr(data-src)').get()
                 yield {'date': date, 'sinopse': sinopse, 'category': category, 'name': name, 'imageM': imageM}
-
+                #Coloca as informações em um dicionário.
+                x = {"name": name, "sinopse": sinopse, "category": category, "date": date, "imageM": imageM}
+                self.lista.append(x) #Insere o dicionário em uma lista.
+        dynamodb.addMovies(self.lista)
+                
 if __name__ == '__main__':
     '''Salva as informações em um arquivo Json.'''
-    process = CrawlerProcess(settings={
-        'FEED_FORMAT': 'json',
-        'FEED_URI': 'InformationsMovies.json'
-    })
-    
+    process = CrawlerProcess()
     process.crawl(MovieSpider)
     process.start()

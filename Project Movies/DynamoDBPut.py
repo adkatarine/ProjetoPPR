@@ -15,18 +15,21 @@ class DynamoDBPut:
         pass
         
     '''Adiciona um novo filme. '''
-    def addMovies(self, title, sinopse, category, imageM):
-        self.__dynamodbTable.put_Item(
-            Item = {
-                    'title': title,
-                    'sinopse:': sinopse,
-                    'category': category,
-                    'imageM': imageM,
-                    'positive': 0,
-                    'negative': 0,
-            },
-            ConditionExpression = "attribute_not_exists(Id)"
-        )
+    def addMovies(self, listMovies):
+        newListMovies = self.checkMovieExist(listMovies)
+        
+        for dictMovie in newListMovies:
+            self.__dynamodbTable.put_Item(
+                Item = {
+                        'title': dictMovie['title'],
+                        'sinopse:': dictMovie['sinopse'],
+                        'category': dictMovie['category'],
+                        'imageM': dictMovie['imageM'],
+                        'positive': 0,
+                        'negative': 0,
+                },
+                ConditionExpression = "attribute_not_exists(Id)"
+            )
     
     '''Atualiza os sentimentos. '''
     def attSentiments(self, title, typeSentiment):
@@ -51,7 +54,7 @@ class DynamoDBPut:
                 }
             )
     
-    '''Pega o nome de cada filme'''
+    '''Pega o nome de cada filme. '''
     def getNameMovies(self):
         response = self.__dynamodbTable.scan(
                 AttributesToGet=[
@@ -61,13 +64,24 @@ class DynamoDBPut:
         return response['items']
     
     '''Apaga um filme a partir do título(chave primária). '''
-    def deleteMovies(self, title):
-        self.__dynamodbTable.delete_item(
-                key={
-                    'title': title,
-                }
-        )
+    def deleteMovies(self, listTitles):
+        for title in listTitles:
+            self.__dynamodbTable.delete_item(
+                    key={
+                        'title': title,
+                    }
+            )
     
-    def checkMovieExist(self):
-        pass
-    
+    '''Verifica se os filmes em cartaz ainda são os mesmos, atualizando a tabela com os estreados e apagando
+    os que saíram de cartaz. '''
+    def checkMovieExist(self, listMovies):
+        listTitle = self.getNameMovies()
+        
+        if(listTitle != None):
+            for dictMovie in listMovies:
+                for title in listTitle:
+                    if(dictMovie['title'] == title['title']):
+                        listTitle.remove(title)
+                        listMovies.remove(dictMovie)
+            self.deleteMovies(listTitle)
+        return listMovies
