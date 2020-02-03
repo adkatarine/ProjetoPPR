@@ -10,8 +10,6 @@ from watson_developer_cloud.natural_language_understanding_v1 \
 import Features, SentimentOptions
 
 class WatsonSentimentsAnalysis:
-    __response = None
-    __natural_language_understanding = None
     
     def __init__(self):
         self.__natural_language_understanding = NaturalLanguageUnderstandingV1(

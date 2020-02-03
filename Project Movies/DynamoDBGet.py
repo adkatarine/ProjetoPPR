@@ -17,7 +17,7 @@ class DynamoDBPut:
     '''Recupera todos os dados da tabela. '''
     def batchGetMovies(self):
         response = self.__dynamodbTable.scan()
-        return response['items']
+        return response['Items']
     
     def returnJsonMovies(self, response):
         pass

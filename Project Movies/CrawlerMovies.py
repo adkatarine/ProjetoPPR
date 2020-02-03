@@ -17,11 +17,12 @@ class MovieSpider(scrapy.Spider):
                 date = movie.xpath('.//article/meta[re:test(@itemprop, "dateCreated")]/@content').get()
                 sinopse = movie.xpath('.//article/meta[re:test(@itemprop, "description")]/@content').get()
                 category = movie.css('article.card a::attr(onmousedown)').get()
-                name = movie.css('article.card h1::text').get()
+                title = movie.css('article.card h1::text').get()
                 imageM = movie.css('article.card img::attr(data-src)').get()
-                yield {'date': date, 'sinopse': sinopse, 'category': category, 'name': name, 'imageM': imageM}
+                yield {'date': date, 'sinopse': sinopse, 'category': category, 'title': title, 'imageM': imageM}
                 #Coloca as informações em um dicionário.
-                x = {"name": name, "sinopse": sinopse, "category": category, "date": date, "imageM": imageM}
+                x = {"title": title, "sinopse": sinopse, "category": category, "date": date, "imageM": imageM}
+                #dynamodb.addMovies(name, sinopse, category, imageM)
                 self.lista.append(x) #Insere o dicionário em uma lista.
         dynamodb.addMovies(self.lista)
                 
