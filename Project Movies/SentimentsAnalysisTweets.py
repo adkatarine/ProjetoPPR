@@ -20,6 +20,7 @@ class WatsonSentimentsAnalysis:
     def checkSentiment(self, frase):
         self.__response = self.__natural_language_understanding.analyze(
           text=frase,
+          language('pt'),
          features=Features(
         sentiment=SentimentOptions(document=True)
         ))

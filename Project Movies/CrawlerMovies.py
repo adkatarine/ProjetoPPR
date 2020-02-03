@@ -22,12 +22,10 @@ class MovieSpider(scrapy.Spider):
                 yield {'date': date, 'sinopse': sinopse, 'category': category, 'title': title, 'imageM': imageM}
                 #Coloca as informações em um dicionário.
                 x = {"title": title, "sinopse": sinopse, "category": category, "date": date, "imageM": imageM}
-                #dynamodb.addMovies(name, sinopse, category, imageM)
                 self.lista.append(x) #Insere o dicionário em uma lista.
         dynamodb.addMovies(self.lista)
                 
 if __name__ == '__main__':
-    '''Salva as informações em um arquivo Json.'''
     process = CrawlerProcess()
     process.crawl(MovieSpider)
     process.start()

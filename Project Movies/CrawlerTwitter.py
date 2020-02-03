@@ -16,16 +16,15 @@ class CrawlerTwitter:
     __keySecret = ''
     __token = ''
     __tokenSecret = ''
-    __listNameMovies = []
     
     def __init__(self):
         self.__autentica = tweepy.OAuthHandler(self.__key, self.__keySecret)
         self.__autentica.set_access_token(self.__token, self.__tokenSecret)
+        self.__listNameMovies = []
     
-    def readJson(self):
-        result = dynamodb.getNameMovies()
-        print(result)
-        for movies in result:
+    def getTitleMoviesDynamodb(self):
+        nameMovies = dynamodb.getNameMovies()
+        for movies in nameMovies:
             if movies != None:
                 self.__listNameMovies.append(movies['title'])
         
@@ -40,17 +39,12 @@ class CrawlerTwitterSL(tweepy.StreamListener):
     __listNameMovies = []
 
     def on_status(self, status):
-        print("***************************************")
-        print(status.text)
-        print("***************************************")
         if not status.retweeted and 'RT @' not in status.text:
             for title in self.__listNameMovies:
                 result = re.search(title, status.text)
-                if(result != None):
+                if(result != None and len(status.text) > 10 and len((status.text).split(" "))):
                     if(result.group(0) == title):
-                        print("************PASSOU PELO IF************")
                         self.__sentiment = sentimentTweets.checkSentiment(status.text)
-                        print("************PASSOU PELO MEIO DO IF************")
                         dynamodb.attSentiments(title, self.__sentiment)
                         break
             
@@ -59,7 +53,7 @@ class CrawlerTwitterSL(tweepy.StreamListener):
             print('420 error')
             return False
     
-    def getListNameMovies(self, listMovies):
+    def setListNameMovies(self, listMovies):
         self.__listNameMovies = listMovies
     
 if __name__ == '__main__':
