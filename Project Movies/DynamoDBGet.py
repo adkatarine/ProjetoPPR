@@ -17,4 +17,12 @@ class DynamoDBGet:
     '''Recupera todos os dados da tabela. '''
     def batchGetMovies(self):
         response = self.__dynamodbTable.scan()
-        return response['Items']
+        return self.orderMovies(response['Items'])
+    
+    '''Ordena os filmes em um ranking pelos atributos "positive" e "negative". '''
+    def orderMovies(self, response):
+        for movie in response:
+            valor = movie['positive'] - movie['negative']
+            movie['value'] = valor
+        moviesJson = sorted(movie, key=lambda k: k['value'], reverse=True)
+        return moviesJson
