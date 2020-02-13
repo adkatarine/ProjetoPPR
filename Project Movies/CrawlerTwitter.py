@@ -30,7 +30,7 @@ class CrawlerTwitter:
         
     def tweetStream(self):
         ct_streamListener = CrawlerTwitterSL()
-        ct_streamListener.getListNameMovies(self.__listNameMovies)
+        ct_streamListener.setListNameMovies(self.__listNameMovies)
         api = tweepy.API(self.__autentica)
         stream = tweepy.Stream(api.auth, ct_streamListener)
         stream.filter(track= self.__listNameMovies, languages=["pt"])
@@ -55,8 +55,3 @@ class CrawlerTwitterSL(tweepy.StreamListener):
     
     def setListNameMovies(self, listMovies):
         self.__listNameMovies = listMovies
-    
-if __name__ == '__main__':
-    ct = CrawlerTwitter()
-    ct.readJson()
-    ct.tweetStream()

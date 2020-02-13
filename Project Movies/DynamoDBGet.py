@@ -24,5 +24,5 @@ class DynamoDBGet:
         for movie in response:
             valor = movie['positive'] - movie['negative']
             movie['value'] = valor
-        moviesJson = sorted(movie, key=lambda k: k['value'], reverse=True)
+        moviesJson = sorted(response, key=lambda k: k['value'], reverse=True)
         return moviesJson
