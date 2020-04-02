@@ -46,7 +46,7 @@ function listMovies(movies){
 
         let imagemModal = document.createElement('img');
         imagemModal.setAttribute('id', 'card-image');
-        imagemModal.setAttribute('class', 'd-none d-md-block');
+        //imagemModal.setAttribute('class', 'd-none d-md-block');
         imagemModal.setAttribute('onerror', "this.src='ERROR.png'");
         imagemModal.setAttribute('src', movies[i].imageM);
 
@@ -128,7 +128,7 @@ function listMovies(movies){
 
         var idAuxModal = 'siteModal' + i;
         let criarDivModalModal = document.createElement('div');
-        criarDivModalModal.setAttribute('class', 'modal');
+        criarDivModalModal.setAttribute('class', 'modal fade');
         criarDivModalModal.setAttribute('aria-labelledby', 'siteModalAria');
         criarDivModalModal.setAttribute('aria-hidden', 'true');
         criarDivModalModal.setAttribute('id', idAuxModal);
@@ -158,6 +158,11 @@ function listMovies(movies){
 
 
         //Próxima DIV
+
+        let tituloCardM = document.createElement('p');
+        tituloCardM.setAttribute('id', 'card-title-m');
+        tituloCardM.appendChild(document.createTextNode(movies[i].title));
+
         let tituloCard = document.createElement('p');
         tituloCard.setAttribute('class', 'card-title');
         var cartaz = '';
@@ -196,6 +201,7 @@ function listMovies(movies){
 
         let criarDivInfo = document.createElement('div');
         criarDivInfo.setAttribute('id', 'card-body');
+        criarDivInfo.appendChild(tituloCardM);
         criarDivInfo.appendChild(tituloCard);
         criarDivInfo.appendChild(avaliacoes);
         criarDivInfo.appendChild(verModal);
