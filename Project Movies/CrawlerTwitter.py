@@ -12,10 +12,10 @@ import SentimentsAnalysisTweets as sat
 sentimentTweets = sat.WatsonSentimentsAnalysis()
 
 class CrawlerTwitter:
-    __key = ''
-    __keySecret = ''
-    __token = ''
-    __tokenSecret = ''
+    __key = 'sMdqkQ2LCZCy9QEzChQ3wQG5e'
+    __keySecret = 'B2uPY7JEzbim7fiz1mPi6nKsrdtNxt44dDNOzNjNCyViE52kfF'
+    __token = '1192966006215520257-XSvhiGrUBDLKvgjE1dRgG1t6bbmNJY'
+    __tokenSecret = 'N5SrG3qLvZo1e62Ait41ArTM07oopAl8iBU03F4dB0paJ'
     
     def __init__(self):
         self.__autentica = tweepy.OAuthHandler(self.__key, self.__keySecret)
@@ -55,3 +55,8 @@ class CrawlerTwitterSL(tweepy.StreamListener):
     
     def setListNameMovies(self, listMovies):
         self.__listNameMovies = listMovies
+    
+if __name__ == '__main__':
+    ct = CrawlerTwitter()
+    ct.getTitleMoviesDynamodb()
+    ct.tweetStream()

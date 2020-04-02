@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <!--Content: ocupa (se adapta) a largura da tela do dispositivo // escala inicial padrão (zoom padrão) // 
+    "encolher para caber", conteudo da tela reduzir de tamanho para caber nela.-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="js/bootstrap.min.js">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="popper.js/dist/umd/popper.js">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/2.0.3/fetch.js"></script>-->
+    
+    <title>Bootstrap</title>
+</head>
+<body>
+<!--Navbar-->
+
+    <nav class="navbar navbar-expand-lg navbar-light navbar-custom" role = "navigation">
+        <div class="container">
+            <a class="navbar-brand" href="#">RankFilmes</a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSite">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSite">
+                <ul class="navbar-nav ml-auto">
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-toggle="modal" data-target="#siteModalNav">Sobre</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="modal" id="siteModalNav" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Sobre</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Este site é um projeto da disciplina EXA844 - Programação para Redes 2019.2.</p>
+                    <p>Seu objetivo é mostrar ao usuário quão satisfatório tem sido os filmes 
+                        que estão/estarão em cartaz no cinema através de um ranking. Os dados são extraídos do twitter e assim feita uma análise
+                        de sentimentos dos tweets.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<div>
+    <p id="p-ranking"> <ion-icon name="arrow-redo-circle-outline">Ranking</ion-icon> </p>
+</div>
+
+<div class="divdiv"> 
+    <div class="divdivdiv">
+        <p class="p-div"></p>
+    </div>
+</div>
+
+<div id="div-total">
+
+    <!--Card-->
+    <div class="container div-row-card" align="center">
+        <div id="div-cards">
+            <!--<div class="card card-c" id="id-card-c"> -->
+                <!--<p id="id-ranking"></p> Exibe posição no ranking-->
+                <!--<img class="card-img" id="card-image" src=""> Exibe cartaz do filme-->
+                <!--<div id="card-body">-->
+                    <!--<p class="card-title"></p> Exibe título do filme-->
+                    <!--<p id="card-avaliacao" align="left"></p> Exibe avaliações do filme-->
+                    <!--<p id="card-link"> <a href="#" data-toggle="modal" data-target="#siteModal">Ver mais...</a> </p>
+                </div>
+            </div>-->
+        </div>
+    </div>
+
+
+    <!--Modal-->
+    <!--<div class="modal" id="siteModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">-->
+
+                <!--<div class="modal-header">
+                    <p class="modal-title" face=""></p> Exibe título do filme
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span>&times;</span>
+                    </button>
+                </div>-->
+
+                <!--<div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row">-->
+
+                            <!--<div id="div-row-one">
+                                <img class="card-img" id="modal-image" src=""> Exibe cartaz do filme-->
+                                <!--<p id="modal-p" margin-top="20px;"><b>Estreia:</b> </p> Exibe data de estreia do filme
+                            </div>-->
+
+                            <!--<div id="div-row-two">
+                                <p class="parag"><b>Sinopse:</b></p> Exibe sinopse do filme-->
+                                <!--<hr size="10" width="500px">
+                                <p class="parag"> <b>Categoria:</b></p> Exibe categoria do filme-->
+                                <!--<hr size="10" width="500px">
+                                <p class="parag"> <b>Elenco:</b></p> Exibe elenco do filme-->
+                                <!--<hr size="10" width="500px">
+                                <p class="parag"> <b>Direção:</b> </p> Exibe direção do filme-->
+                                <!--<hr size="10" width="500px">
+                                <p class="parag"> <b>País de origem:</b></p> Exibe país de origem do filme
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>-->
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<!--<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    Importando o js do bootstrap 
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>-->
+<script src="./bundle.js"></script>
+</body>
+</html>

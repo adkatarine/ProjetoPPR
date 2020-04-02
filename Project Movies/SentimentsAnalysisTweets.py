@@ -13,14 +13,13 @@ class WatsonSentimentsAnalysis:
     
     def __init__(self):
         self.__natural_language_understanding = NaturalLanguageUnderstandingV1(
-          iam_apikey='',
-          url='',
+          iam_apikey='dubr2NxYkmr-X76Ep4v5p5gbC4ygaw6gd8-glLG4GFAr',
+          url='https://api.us-south.natural-language-understanding.watson.cloud.ibm.com/instances/20460411-ac9b-41e5-bb24-a3b03f4195f7',
           version='2020-01-21')
     
     def checkSentiment(self, frase):
         self.__response = self.__natural_language_understanding.analyze(
           text=frase,
-          language('pt'),
          features=Features(
         sentiment=SentimentOptions(document=True)
         ))

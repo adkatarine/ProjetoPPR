@@ -1,25 +1,18 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Jan 28 23:32:19 2020
-
-@author: Adlla Katarine
-"""
-
 import boto3
 
 class DynamoDBPut:
 
     def __init__(self):
-        __dynamodb = boto3.resource('dynamodb', aws_access_key_id='',
-                                    aws_secret_access_key='', region_name='us-east-1')
+        __dynamodb = boto3.resource('dynamodb', aws_access_key_id='AKIAIQN25V2WBEFAZBGA',
+                                    aws_secret_access_key='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', 
+                                    region_name='us-east-1', endpoint_url = "http://dynamodb.us-east-1.amazonaws.com")
         self.__dynamodbTable = __dynamodb.Table('Movies')
         
     '''Adiciona um novo filme. '''
     def addMovies(self, listMovies):
-        newListMovies = self.checkMovieExist(listMovies)
-        
-        if(newListMovies != None):
-            for dictMovie in newListMovies:
+        #newListMovies = self.checkMovieExist(listMovies)
+        if(listMovies != None):
+            for dictMovie in listMovies:
                 if(dictMovie['title'] != None):
                     self.__dynamodbTable.put_item(
                         Item = {
@@ -29,8 +22,7 @@ class DynamoDBPut:
                                 'imageM': dictMovie['imageM'],
                                 'positive': 0,
                                 'negative': 0,
-                        },
-                        ConditionExpression = "attribute_not_exists(Id)"
+                        }
                     )
     
     '''Atualiza os sentimentos. '''
